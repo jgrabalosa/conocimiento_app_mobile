@@ -1,0 +1,36 @@
+name: conocimiento_app_mobile
+description: "Norday — App de Conocimiento"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  # El motor del ecosistema: red, temas, gamificación, mascota, onboarding y
+  # preferencias. Lo que vive ahí no sabe de píldoras ni de categorías.
+  norday_flutter_core:
+    git:
+      url: https://github.com/jgrabalosa/norday_flutter_core.git
+      ref: main
+  intl: any
+  cupertino_icons: ^1.0.8
+  http: ^1.2.0
+  shared_preferences: 2.2.2
+  google_fonts: ^8.1.0
+  lucide_icons_flutter: ^3.1.15
+  # Todavía sin usar: lo necesita el detalle de píldora (Paso F4), que pinta
+  # el contenido en Markdown. Se declara ya para no volver a tocar el pubspec.
+  flutter_markdown_plus: ^1.0.10
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
