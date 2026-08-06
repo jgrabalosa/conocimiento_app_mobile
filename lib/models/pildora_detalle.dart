@@ -10,6 +10,13 @@ class PildoraDetalle {
   final String estado; // VISTA o GUARDADA
   final int? valoracionUsuario; // null si aún no ha valorado
 
+  /// La nota que el usuario escribió al valorar, si escribió alguna.
+  ///
+  /// Vuelve del backend para poder precargar `ValoracionSheet`: `valorar()`
+  /// sobrescribe la nota con lo que reciba, así que sin esto cambiar sólo las
+  /// estrellas borraría en silencio lo que ya había escrito.
+  final String? notaPersonalUsuario;
+
   PildoraDetalle({
     required this.pildoraId,
     required this.titulo,
@@ -19,6 +26,7 @@ class PildoraDetalle {
     this.categorias = const [],
     required this.estado,
     this.valoracionUsuario,
+    this.notaPersonalUsuario,
   });
 
   factory PildoraDetalle.fromJson(Map<String, dynamic> json) {
@@ -33,6 +41,7 @@ class PildoraDetalle {
           .toList(),
       estado: json['estado'],
       valoracionUsuario: json['valoracionUsuario'],
+      notaPersonalUsuario: json['notaPersonalUsuario'],
     );
   }
 }

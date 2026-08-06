@@ -26,6 +26,9 @@ dependencies:
   # Todavía sin usar: lo necesita el detalle de píldora (Paso F4), que pinta
   # el contenido en Markdown. Se declara ya para no volver a tocar el pubspec.
   flutter_markdown_plus: ^1.0.10
+  # Compartir la píldora desde el detalle. La 13 ya no usa `Share.share`:
+  # es `SharePlus.instance.share(ShareParams(...))`, lo otro está deprecado.
+  share_plus: ^13.3.0
 
 dev_dependencies:
   flutter_test:
