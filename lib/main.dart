@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:norday_flutter_core/norday_flutter_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'widgets/portal_conocimiento.dart';
 import 'widgets/splash_conocimiento.dart';
 
 void main() {
@@ -70,7 +71,7 @@ class SplashScreen extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (_) => token != null
-                ? const PlaceholderHome()
+                ? const PortalConocimiento()
                 : const LoginScreen(destinoTrasLogin: destinoTrasLogin),
           ),
         );
@@ -82,10 +83,13 @@ class SplashScreen extends StatelessWidget {
 /// Adónde va el motor cuando la sesión ya es buena. `LoginScreen` no puede
 /// conocer las pantallas de esta app, así que se las enchufamos desde aquí.
 ///
-/// Se sustituye por el HomeShell real en los pasos F2-F6; por ahora solo
-/// confirma que login y splash funcionan de punta a punta.
+/// `mostrarOnboarding` se ignora a propósito: significa "la cuenta se acaba de
+/// crear", no "este usuario ya configuró sus categorías en esta app", y con
+/// una cuenta compartida entre apps del ecosistema no son lo mismo. Quien lo
+/// decide es [PortalConocimiento], preguntándoselo al backend. El parámetro
+/// se queda porque la firma la exige `LoginScreen`.
 Widget destinoTrasLogin(BuildContext context, bool mostrarOnboarding) =>
-    const PlaceholderHome();
+    const PortalConocimiento();
 
 class PlaceholderHome extends StatelessWidget {
   const PlaceholderHome({super.key});
