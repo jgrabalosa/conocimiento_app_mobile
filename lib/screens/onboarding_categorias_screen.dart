@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:norday_flutter_core/norday_flutter_core.dart';
 
-import '../main.dart';
 import '../models/categoria_conocimiento.dart';
 import '../models/preferencia_categoria.dart';
 import '../services/api_service_conocimiento.dart';
 import '../widgets/error_carga.dart';
+import 'home_conocimiento_screen.dart';
 
 /// Los tres estados, literales y no un enum: es exactamente lo que viaja en
 /// `PreferenciaCategoria.estado`, y duplicarlo en un enum paralelo sólo
@@ -79,7 +79,7 @@ class _OnboardingCategoriasScreenState extends State<OnboardingCategoriasScreen>
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const PlaceholderHome()),
+        MaterialPageRoute(builder: (_) => const HomeConocimientoScreen()),
       );
     } catch (e) {
       if (!mounted) return;

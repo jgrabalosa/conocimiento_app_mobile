@@ -91,13 +91,3 @@ class SplashScreen extends StatelessWidget {
 Widget destinoTrasLogin(BuildContext context, bool mostrarOnboarding) =>
     const PortalConocimiento();
 
-class PlaceholderHome extends StatelessWidget {
-  const PlaceholderHome({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('Conocimiento — en construcción')),
-    );
-  }
-}

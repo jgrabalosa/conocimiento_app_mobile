@@ -1,4 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- La app no hace nada sin red: todo sale de la API. Se declara aquí y
+         no se deja al manifest merger, que hoy la trae de rebote desde las
+         librerías de Firebase y Google Sign-In: el día que se caiga una de
+         esas dependencias, el permiso se iría con ella sin que nada avise.
+         Los manifests de debug y profile la declaran aparte, para el tooling
+         de Flutter, y esos no llegan a release. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:label="conocimiento_app_mobile"
         android:name="${applicationName}"
