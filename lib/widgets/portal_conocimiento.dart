@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../main.dart';
 import '../models/preferencia_categoria.dart';
+import '../screens/home_conocimiento_screen.dart';
 import '../screens/onboarding_categorias_screen.dart';
 import '../services/api_service_conocimiento.dart';
 import 'error_carga.dart';
@@ -57,7 +57,9 @@ class _PortalConocimientoState extends State<PortalConocimiento> {
           );
         }
         final yaEligio = snapshot.data!.any((p) => p.estado == 'QUIERE');
-        return yaEligio ? const PlaceholderHome() : const OnboardingCategoriasScreen();
+        return yaEligio
+            ? const HomeConocimientoScreen()
+            : const OnboardingCategoriasScreen();
       },
     );
   }
