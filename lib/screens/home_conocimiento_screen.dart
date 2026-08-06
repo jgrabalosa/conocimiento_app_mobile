@@ -8,6 +8,7 @@ import 'package:norday_flutter_core/norday_flutter_core.dart'
 import '../main.dart';
 import '../widgets/bucle_pildoras.dart';
 import 'coleccion_screen.dart';
+import 'perfil_usuario_lector_screen.dart';
 
 /// La pantalla principal: el bucle de píldoras y nada más.
 ///
@@ -52,7 +53,7 @@ class HomeConocimientoScreen extends StatelessWidget {
           IconButton(
             tooltip: 'Perfil',
             icon: Icon(LucideIcons.userRound, color: t.textMuted),
-            onPressed: () => _abrir(context, const PerfilProvisional()),
+            onPressed: () => _abrir(context, const PerfilUsuarioLectorScreen()),
           ),
           PopupMenuButton<String>(
             icon: Icon(LucideIcons.menu, color: t.textMuted),
@@ -75,19 +76,6 @@ class HomeConocimientoScreen extends StatelessWidget {
         ],
       ),
       body: const BuclePildoras(),
-    );
-  }
-}
-
-/// Provisional hasta F6, mismo criterio que tuvo `PlaceholderHome` en F1.
-class PerfilProvisional extends StatelessWidget {
-  const PerfilProvisional({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Perfil')),
-      body: const Center(child: Text('Perfil — en construcción')),
     );
   }
 }
