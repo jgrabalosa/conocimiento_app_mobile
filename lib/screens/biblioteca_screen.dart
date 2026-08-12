@@ -8,7 +8,7 @@ import '../services/api_service_conocimiento.dart';
 import '../widgets/error_carga.dart';
 import 'detalle_pildora_screen.dart';
 
-/// Los dos estados que llegan a la Colección. Lo descartado no es de nadie y
+/// Los dos estados que llegan a la Biblioteca. Lo descartado no es de nadie y
 /// no aparece nunca, así que aquí no hay un tercer valor.
 const String _vista = 'VISTA';
 const String _guardada = 'GUARDADA';
@@ -20,7 +20,7 @@ const double _ladoMiniatura = 56;
 /// Los filtros no se combinan en una sola pregunta al backend por comodidad:
 /// `getColeccion` ya acepta los dos por separado y distingue "sin filtrar" de
 /// un filtro vacío, así que cada uno viaja como lo que es.
-class ColeccionScreen extends StatefulWidget {
+class BibliotecaScreen extends StatefulWidget {
   /// Costuras de test, mismo criterio que en `OnboardingCategoriasScreen`:
   /// `ApiServiceCore.cliente` es `final` y no hay dónde meter un cliente
   /// falso sin tocar el paquete. En producción nadie pasa esto.
@@ -30,17 +30,17 @@ class ColeccionScreen extends StatefulWidget {
     String? estado,
   })? cargarColeccion;
 
-  const ColeccionScreen({
+  const BibliotecaScreen({
     super.key,
     this.cargarCategorias,
     this.cargarColeccion,
   });
 
   @override
-  State<ColeccionScreen> createState() => _ColeccionScreenState();
+  State<BibliotecaScreen> createState() => _BibliotecaScreenState();
 }
 
-class _ColeccionScreenState extends State<ColeccionScreen> {
+class _BibliotecaScreenState extends State<BibliotecaScreen> {
   /// null en los dos es "Todas". Son independientes: cambiar uno no toca el
   /// otro.
   String? _estado;
@@ -129,7 +129,7 @@ class _ColeccionScreenState extends State<ColeccionScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Colección',
+        title: const Text('Biblioteca',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
       ),
       body: Column(

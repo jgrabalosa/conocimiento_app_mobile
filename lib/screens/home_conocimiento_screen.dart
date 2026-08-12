@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-// El paquete exporta su propia `ColeccionScreen` —la de trofeos de Hábitos,
-// que no tiene nada que ver con esta— y el nombre chocaría.
-import 'package:norday_flutter_core/norday_flutter_core.dart'
-    hide ColeccionScreen;
+import 'package:norday_flutter_core/norday_flutter_core.dart';
 
 import '../main.dart';
 import '../widgets/bucle_pildoras.dart';
-import 'coleccion_screen.dart';
+import 'biblioteca_screen.dart';
 import 'perfil_usuario_lector_screen.dart';
 
 /// La pantalla principal: el bucle de píldoras y nada más.
@@ -46,9 +43,9 @@ class HomeConocimientoScreen extends StatelessWidget {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         actions: [
           IconButton(
-            tooltip: 'Colección',
+            tooltip: 'Biblioteca',
             icon: Icon(LucideIcons.library, color: t.textMuted),
-            onPressed: () => _abrir(context, const ColeccionScreen()),
+            onPressed: () => _abrir(context, const BibliotecaScreen()),
           ),
           IconButton(
             tooltip: 'Perfil',
