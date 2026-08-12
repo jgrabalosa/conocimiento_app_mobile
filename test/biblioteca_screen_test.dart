@@ -1,14 +1,11 @@
 import 'package:conocimiento_app_mobile/models/categoria_conocimiento.dart';
 import 'package:conocimiento_app_mobile/models/pildora_coleccion_item.dart';
-import 'package:conocimiento_app_mobile/screens/coleccion_screen.dart';
+import 'package:conocimiento_app_mobile/screens/biblioteca_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-// Del paquete solo hacen falta los delegates; su `ColeccionScreen` es otra
-// pantalla distinta y el nombre chocaría con la que se prueba aquí.
-import 'package:norday_flutter_core/norday_flutter_core.dart'
-    hide ColeccionScreen;
+import 'package:norday_flutter_core/norday_flutter_core.dart';
 
 final _categorias = [
   CategoriaConocimiento(categoriaId: 1, nombre: 'Ciencia'),
@@ -55,7 +52,7 @@ Widget _app(_EspiaColeccion espia) => MaterialApp(
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      home: ColeccionScreen(
+      home: BibliotecaScreen(
         cargarCategorias: () async => _categorias,
         cargarColeccion: espia.cargar,
       ),
