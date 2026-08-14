@@ -14,11 +14,13 @@ PildoraDetalle _detalle({
   String? nota,
   String? libro,
   List<String> categorias = const [],
+  String? contenido,
 }) {
   return PildoraDetalle(
     pildoraId: 3,
     titulo: 'El efecto Zeigarnik',
-    contenidoCompleto: '# Tareas abiertas\n\nLo inacabado **se recuerda** mejor.',
+    contenidoCompleto:
+        contenido ?? '# Tareas abiertas\n\nLo inacabado **se recuerda** mejor.',
     libroOrigen: libro,
     categorias: categorias,
     estado: estado,
@@ -26,6 +28,13 @@ PildoraDetalle _detalle({
     notaPersonalUsuario: nota,
   );
 }
+
+/// El capitular se pinta como un `Text` suelto en cuerpo 52 (la primera letra
+/// en Fraunces). Su presencia o ausencia es lo que distingue una píldora
+/// capitulada de una que se pinta entera tal cual, sin tener que fisgar la
+/// estructura interna del widget.
+final Finder _capitular = find.byWidgetPredicate(
+    (w) => w is Text && w.style?.fontSize == 52);
 
 Widget _app(PildoraDetalle detalle) => MaterialApp(
       locale: const Locale('es'),
@@ -123,5 +132,53 @@ void main() {
     await tester.pumpWidget(_app(_detalle()));
 
     expect(find.textContaining('De:'), findsNothing);
+  });
+
+  // El capitular es para prosa. Un contenido que abre con lista, cita o lista
+  // numerada no debe traer un guion/símbolo/dígito gigante ni perder su
+  // formato: se pinta entero tal cual y el capitular se omite en esa píldora.
+
+  testWidgets('si abre con lista, no hay capitular y la lista se pinta',
+      (tester) async {
+    await tester.pumpWidget(_app(_detalle(
+      contenido: '- Primera viñeta\n- Segunda viñeta',
+    )));
+
+    expect(_capitular, findsNothing);
+    expect(find.textContaining('Primera viñeta', findRichText: true),
+        findsOneWidget);
+  });
+
+  testWidgets('si abre con cita, no hay capitular y la cita se pinta',
+      (tester) async {
+    await tester.pumpWidget(_app(_detalle(
+      contenido: '> Lo inacabado tira de nosotros.',
+    )));
+
+    expect(_capitular, findsNothing);
+    expect(find.textContaining('Lo inacabado tira', findRichText: true),
+        findsOneWidget);
+  });
+
+  testWidgets('si abre con lista numerada, no hay capitular y se pinta',
+      (tester) async {
+    await tester.pumpWidget(_app(_detalle(
+      contenido: '1. Primer paso\n2. Segundo paso',
+    )));
+
+    expect(_capitular, findsNothing);
+    expect(
+        find.textContaining('Primer paso', findRichText: true), findsOneWidget);
+  });
+
+  testWidgets('si abre con párrafo de prosa, el capitular sí aparece',
+      (tester) async {
+    await tester.pumpWidget(_app(_detalle(
+      contenido: 'Un párrafo de prosa que sí lleva capitular.',
+    )));
+
+    expect(_capitular, findsOneWidget);
+    // La primera letra es la que sube a cuerpo 52; el resto sigue normal.
+    expect(tester.widget<Text>(_capitular).data, 'U');
   });
 }

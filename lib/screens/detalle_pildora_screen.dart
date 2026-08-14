@@ -328,8 +328,11 @@ class _DetallePildoraScreenState extends State<DetallePildoraScreen> {
       listBullet: TextStyle(fontSize: 16, height: 1.55, color: t.text),
     );
 
-    // Ni una palabra que capitular: se pinta todo tal cual, sin capitular.
-    if (indice == -1) {
+    // Ni una palabra que capitular, o el primer bloque de contenido no es
+    // prosa (una lista, una cita, una lista numerada): se pinta todo tal cual,
+    // sin capitular. El capitular es un lujo editorial para prosa; sobre una
+    // viñeta pintaría el guion a cuerpo 52 y aplanaría el bloque a texto plano.
+    if (indice == -1 || !_esParrafoDeProsa(bloques[indice])) {
       return [MarkdownBody(data: contenido, styleSheet: estiloParrafo)];
     }
 
@@ -351,6 +354,16 @@ class _DetallePildoraScreenState extends State<DetallePildoraScreen> {
         MarkdownBody(data: despues, styleSheet: estiloParrafo),
       ],
     ];
+  }
+
+  /// Un bloque cuenta como prosa capitulable si su primera línea no abre una
+  /// lista (`-`, `*`, `+`), una cita (`>`) ni una lista numerada (`1.`, `1)`).
+  /// El capitular sólo tiene sentido sobre prosa: sobre cualquiera de esos
+  /// bloques pintaría el símbolo de apertura a cuerpo 52 y, al pasar por
+  /// `_capitular`, aplanaría el bloque a texto plano perdiendo su formato.
+  bool _esParrafoDeProsa(String bloque) {
+    final noProsa = RegExp(r'^([-*+]\s|>\s?|\d+[.)]\s)');
+    return !noProsa.hasMatch(bloque.trimLeft());
   }
 
   /// La primera letra del párrafo, grande, en Fraunces itálica y en la
