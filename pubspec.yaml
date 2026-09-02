@@ -37,3 +37,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    # Las fuentes de las cuatro identidades, empaquetadas. `google_fonts` mira
+    # primero en los assets y sólo baja por HTTP si no encuentra el fichero,
+    # así que basta con listarlas aquí: NO van en la sección `fonts:`, y sus
+    # nombres no se pueden tocar porque el paquete las busca por el nombre con
+    # el que las sirve la API de Google.
+    - google_fonts/

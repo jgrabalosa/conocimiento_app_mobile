@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:norday_flutter_core/norday_flutter_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'widgets/portal_conocimiento.dart';
@@ -9,6 +10,10 @@ void main() {
   // El motor manda esto en la cabecera X-Norday-App: es lo que le dice al
   // backend de qué app son los catálogos que pide.
   ApiServiceCore.appId = 'conocimiento';
+  // Las nueve familias van empaquetadas en google_fonts/. Sin esto el paquete
+  // se las baja por HTTP en el primer arranque: la app se ve con la fuente por
+  // defecto hasta que llegan, y sin red no llegan nunca.
+  GoogleFonts.config.allowRuntimeFetching = false;
   runApp(const ConocimientoApp());
 }
 
