@@ -16,7 +16,7 @@ dependencies:
   norday_flutter_core:
     git:
       url: https://github.com/jgrabalosa/norday_flutter_core.git
-      ref: main
+      ref: a873d8f99fdf42b7e9d9434d8c5d7d545ea525bd
   intl: any
   cupertino_icons: ^1.0.8
   http: ^1.2.0
